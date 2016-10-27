@@ -52,13 +52,13 @@ public class Coordinate {
     }
 
     private void checkLat(double lat) {
-        if(lat < -180 || lat > 180) {
+        if(lat < -90 || lat > 90) {
             throw new IllegalArgumentException();
         }
     }
 
     private void checkLon(double lon) {
-        if(lon < -90 || lon > 90) {
+        if(lon < -180 || lon > 180) {
             throw new IllegalArgumentException();
         }
     }
