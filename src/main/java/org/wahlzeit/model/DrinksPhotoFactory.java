@@ -41,6 +41,17 @@ public class DrinksPhotoFactory extends PhotoFactory {
     }
 
     /**
+     * methodtype set
+     */
+    protected static synchronized void setInstance(DrinksPhotoFactory photoFactory) {
+        if (instance != null) {
+            throw new IllegalStateException("attempt to initialize DrinksPhotoFactory twice");
+        }
+
+        instance = photoFactory;
+    }
+
+    /**
      * methodtype get
      */
     public static synchronized DrinksPhotoFactory getInstance() {
