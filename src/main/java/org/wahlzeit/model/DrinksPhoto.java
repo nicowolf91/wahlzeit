@@ -1,5 +1,8 @@
 package org.wahlzeit.model;
 
+import com.googlecode.objectify.annotation.Subclass;
+
+@Subclass
 public class DrinksPhoto extends Photo {
 
     public static final String DRINK_TYPE = "drink_type";

@@ -1,70 +1,24 @@
 package org.wahlzeit.model;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-/**
- * All test cases of the class {@link Location}.
- */
 public class CoordinateTest {
-    private double epsilon = 0.000001;
+    private static final double epsilon = 10e-6;
 
-    @Test
-    public void testDefaultConstructor() {
-        Coordinate c = new Coordinate();
-        assertEquals(0., c.getLatitude(), epsilon);
-        assertEquals(0., c.getLongitude(), epsilon);
-    }
+    private CartesianCoordinate cc;
+    private SphericCoordinate sc;
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructorIllegalLatitude() {
-        Coordinate c = new Coordinate(1000., 50.);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructorIllegalLongitude() {
-        Coordinate c = new Coordinate(50., 1000.);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetterIllegalLatitude() {
-        Coordinate c = new Coordinate();
-        c.setLatitude(1000.);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSetterIllegalLongitude() {
-        Coordinate c = new Coordinate();
-        c.setLongitude(1000.);
+    @Before
+    public void setUp() {
+        cc = new CartesianCoordinate(1111., 2222., 3333.);
+        sc = new SphericCoordinate(45., 30.);
     }
 
     @Test
-    public void testDistanceBetweenSameCoordinate() {
-        Coordinate c = new Coordinate(30., 30.);
-        assertEquals(0., c.getDistance(c), epsilon);
-
-        Coordinate c2 = new Coordinate(30., 30.);
-        assertEquals(0., c.getDistance(c2), epsilon);
-    }
-
-    @Test
-    public void testResultInDifferentOrder() {
-        Coordinate c1 = new Coordinate(25., 25.);
-        Coordinate c2 = new Coordinate(25., 25.);
-        assertEquals(c1.getDistance(c2), c2.getDistance(c1), epsilon);
-    }
-
-    @Test
-    public void testGetDistance() {
-        Coordinate c1 = new Coordinate(55., 90.0);
-        Coordinate c2 = new Coordinate(-35.0, 25.0);
-        assertEquals(12746.795384, c1.getDistance(c2), epsilon);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testGetDistanceNullPointer() {
-        Coordinate c = new Coordinate(10., 10.);
-        c.getDistance(null);
+    public void getDistance() {
+        assertEquals(2464.90127, cc.getDistance(sc), epsilon);
     }
 }
