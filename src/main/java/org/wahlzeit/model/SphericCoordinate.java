@@ -2,9 +2,7 @@ package org.wahlzeit.model;
 
 import java.io.Serializable;
 
-public class SphericCoordinate implements Serializable, Coordinate {
-
-    public static final double EARTH_RADIUS_KM = 6371.;
+public class SphericCoordinate extends AbstractCoordinate implements Serializable {
 
     private double latitude;
     private double longitude;
@@ -16,24 +14,13 @@ public class SphericCoordinate implements Serializable, Coordinate {
     public SphericCoordinate() {
         this.latitude = 0.;
         this.longitude = 0.;
-        this.radius = EARTH_RADIUS_KM;
-    }
-
-    /**
-     * @methodtype constructor
-     */
-    public SphericCoordinate(double lat, double lon) {
-        checkLatLon(lat, lon);
-        this.latitude = lat;
-        this.longitude = lon;
-        this.radius = EARTH_RADIUS_KM;
+        this.radius = 0.;
     }
 
     /**
      * @methodtype constructor
      */
     public SphericCoordinate(double lat, double lon, double radius) {
-        checkLatLon(lat, lon);
         this.latitude = lat;
         this.longitude = lon;
         this.radius = radius;
@@ -50,7 +37,6 @@ public class SphericCoordinate implements Serializable, Coordinate {
      * @methodtype set
      */
     public void setLatitude(double lat) {
-        checkLat(lat);
         this.latitude = lat;
     }
 
@@ -65,7 +51,6 @@ public class SphericCoordinate implements Serializable, Coordinate {
      * @methodtype set
      */
     public void setLongitude(double lon) {
-        checkLon(lon);
         this.longitude = lon;
     }
 
@@ -85,63 +70,30 @@ public class SphericCoordinate implements Serializable, Coordinate {
 
     @Override
     /**
+     * @mathodtype conversion
+     */
+    public CartesianCoordinate asCartesianCoordinate() {
+        return new CartesianCoordinate(getCartesianX(), getCartesianY(), getCartesianZ());
+    }
+
+    /**
      * @methodtype get
      */
-    public double getX() {
+    private double getCartesianX() {
         return radius * Math.sin(Math.toRadians(longitude)) * Math.cos(Math.toRadians(latitude));
     }
 
-    @Override
     /**
      * @methodtype get
      */
-    public double getY() {
+    private double getCartesianY() {
         return radius * Math.sin(Math.toRadians(longitude)) * Math.sin(Math.toRadians(latitude));
     }
 
-    @Override
     /**
      * @methodtype get
      */
-    public double getZ() {
+    private double getCartesianZ() {
         return radius * Math.cos(Math.toRadians(longitude));
-    }
-
-    @Override
-    /**
-     * @methodtype get
-     */
-    public double getDistance(Coordinate c) {
-        if (c == null) {
-            throw new IllegalArgumentException("other Coordinate mustn't be null");
-        }
-
-        return Math.sqrt(Math.pow(c.getX() - getX(), 2) + Math.pow(c.getY() - getY(), 2) + Math.pow(c.getZ() - getZ(), 2));
-    }
-
-    /**
-     * @methodtype assertion
-     */
-    private void checkLat(double lat) {
-        if (lat < -90 || lat > 90) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * @methodtype assertion
-     */
-    private void checkLon(double lon) {
-        if (lon < -180 || lon > 180) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * @methodtype assertion
-     */
-    private void checkLatLon(double lat, double lon) {
-        checkLat(lat);
-        checkLon(lon);
     }
 }

@@ -2,7 +2,7 @@ package org.wahlzeit.model;
 
 import java.io.Serializable;
 
-public class CartesianCoordinate implements Serializable, Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate implements Serializable {
 
     private double x;
     private double y;
@@ -26,7 +26,6 @@ public class CartesianCoordinate implements Serializable, Coordinate {
         this.z = z;
     }
 
-    @Override
     /**
      * methodtype get
      */
@@ -41,7 +40,6 @@ public class CartesianCoordinate implements Serializable, Coordinate {
         this.x = x;
     }
 
-    @Override
     /**
      * methodtype get
      */
@@ -56,7 +54,6 @@ public class CartesianCoordinate implements Serializable, Coordinate {
         this.y = y;
     }
 
-    @Override
     /**
      * methodtype get
      */
@@ -73,13 +70,9 @@ public class CartesianCoordinate implements Serializable, Coordinate {
 
     @Override
     /**
-     * methodtype get
+     * @methodtype conversion
      */
-    public double getDistance(Coordinate c) {
-        if (c == null) {
-            throw new IllegalArgumentException("other Coordinate mustn't be null");
-        }
-
-        return Math.sqrt(Math.pow(c.getX() - getX(), 2) + Math.pow(c.getY() - getY(), 2) + Math.pow(c.getZ() - getZ(), 2));
+    public CartesianCoordinate asCartesianCoordinate() {
+        return this;
     }
 }

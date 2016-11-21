@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CartesianCoordinateTest {
     private static final double epsilon = 10e-6;
@@ -31,6 +32,7 @@ public class CartesianCoordinateTest {
     @Test
     public void testSameCoordinate() {
         assertEquals(0.0, c1.getDistance(c1), epsilon);
+        assertTrue(c1.isEqual(c1));
     }
 
     @Test

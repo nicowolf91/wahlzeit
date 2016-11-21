@@ -1,24 +1,18 @@
 package org.wahlzeit.model;
 
 public interface Coordinate {
-
-    /**
-     * @methodtype get
-     */
-    double getX();
-
-    /**
-     * @methodtype get
-     */
-    double getY();
-
-    /**
-     * @methodtype get
-     */
-    double getZ();
-
     /**
      * @methodtype get
      */
     double getDistance(Coordinate c);
+
+    /**
+     * @methodtype conversion
+     */
+    CartesianCoordinate asCartesianCoordinate();
+
+    /**
+     * @mathodtype comparison
+     */
+    boolean isEqual(Coordinate c);
 }
