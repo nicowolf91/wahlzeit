@@ -31,6 +31,10 @@ public class DrinksPhoto extends Photo {
      */
     public DrinksPhoto(PhotoId myId, double alcoholConcentration, DrinkType drinkType) {
         super(myId);
+
+        assertIsValidAlcoholConcentration(alcoholConcentration);
+        assertIsValidDrinkType(drinkType);
+
         this.alcoholConcentration = alcoholConcentration;
         this.drinkType = drinkType;
     }
@@ -48,6 +52,7 @@ public class DrinksPhoto extends Photo {
      * @methodtype set
      */
     public void setAlcoholConcentration(double alcoholConcentration) {
+        assertIsValidAlcoholConcentration(alcoholConcentration);
         this.alcoholConcentration = alcoholConcentration;
     }
 
@@ -64,6 +69,27 @@ public class DrinksPhoto extends Photo {
      * @methodtype set
      */
     public void setDrinkType(DrinkType drinkType) {
+        assertIsValidDrinkType(drinkType);
         this.drinkType = drinkType;
+    }
+
+    /**
+     *
+     * @methodtype assertion
+     */
+    public void assertIsValidAlcoholConcentration(double alcoholConcentration) {
+        if(Double.isNaN(alcoholConcentration) || Double.isInfinite(alcoholConcentration) || alcoholConcentration < 0) {
+            throw new IllegalArgumentException("value [" + alcoholConcentration + "] of alcohol concentration is invalid");
+        }
+    }
+
+    /**
+     *
+     * @methodtype assertion
+     */
+    public void assertIsValidDrinkType(DrinkType drinkType) {
+        if(drinkType == null) {
+            throw new IllegalArgumentException("drink type must ot be null");
+        }
     }
 }

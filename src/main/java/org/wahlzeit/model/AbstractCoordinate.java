@@ -15,13 +15,13 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @methodtype comparison
      */
     public boolean isEqual(Coordinate c) {
-        assert isNonNullCoordinate(c);
-        assert isValidCoordinate(c);
+        assertIsNonNullCoordinate(c);
+        assertIsValidCoordinate(c);
 
         boolean result = this.getDistance(c) == 0;
 
         assertClassInvariants();
-        assert isValidCoordinate(c);
+        assertIsValidCoordinate(c);
 
         return result;
     }
@@ -30,8 +30,8 @@ public abstract class AbstractCoordinate implements Coordinate {
      * @methodtype get
      */
     public double getDistance(CartesianCoordinate cc) {
-        assert isNonNullCoordinate(cc);
-        assert isValidCoordinate(cc);
+        assertIsNonNullCoordinate(cc);
+        assertIsValidCoordinate(cc);
 
         double result = Math.sqrt(
                 Math.pow(cc.getX() - asCartesianCoordinate().getX(), 2) +
@@ -39,10 +39,10 @@ public abstract class AbstractCoordinate implements Coordinate {
                 Math.pow(cc.getZ() - asCartesianCoordinate().getZ(), 2)
         );
 
-        assert isDoubleInRange(result);
+        assertDoubleIsInRange(result);
         assert result >= 0;
         assertClassInvariants();
-        isValidCoordinate(cc);
+        assertIsValidCoordinate(cc);
 
         return result;
     }
@@ -50,35 +50,35 @@ public abstract class AbstractCoordinate implements Coordinate {
     /**
      * @methodtype assertion
      */
-    protected boolean isNonNullCoordinate(Coordinate c) {
+    protected void assertIsNonNullCoordinate(Coordinate c) {
         if(c == null) {
-            return false;
+            throw new IllegalArgumentException("Coordinate must not be null!");
         }
-        return true;
     }
 
     /**
      * @methodtype assertion
      */
-    protected boolean isDoubleInRange(double d) {
-        if(!(Double.isInfinite(d) || Double.isNaN(d))) {
-            return true;
+    protected void assertDoubleIsInRange(double d) {
+        if(Double.isInfinite(d) || Double.isNaN(d)) {
+            throw new IllegalArgumentException("value [" + d + "] is not valid");
         }
-        return false;
     }
 
     /**
      * @methodtype assertion
      */
     protected void assertClassInvariants() {
-        assert isValidCoordinate(this);
+        assertIsValidCoordinate(this);
     }
 
     /**
      * @methodtype
      */
-    protected boolean isValidCoordinate(Coordinate c) {
+    protected void assertIsValidCoordinate(Coordinate c) {
         CartesianCoordinate cc = c.asCartesianCoordinate();
-        return isDoubleInRange(cc.getX()) && isDoubleInRange(cc.getY()) && isDoubleInRange(cc.getZ());
+        assertDoubleIsInRange(cc.getX());
+        assertDoubleIsInRange(cc.getY());
+        assertDoubleIsInRange(cc.getZ());
     }
 }

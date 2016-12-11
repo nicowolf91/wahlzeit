@@ -12,9 +12,7 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
      * @methodtype constructor
      */
     public CartesianCoordinate() {
-        this.x = 0.;
-        this.y = 0.;
-        this.z = 0.;
+        this(0., 0., 0.);
         assertClassInvariants();
     }
 
@@ -22,9 +20,9 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
      * @methodtype constructor
      */
     public CartesianCoordinate(double x, double y, double z) {
-        assert isDoubleInRange(x);
-        assert isDoubleInRange(y);
-        assert isDoubleInRange(z);
+        assertDoubleIsInRange(x);
+        assertDoubleIsInRange(y);
+        assertDoubleIsInRange(z);
 
         this.x = x;
         this.y = y;
@@ -43,7 +41,7 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
      * methodtype set
      */
     public void setX(double x) {
-        assert isDoubleInRange(x);
+        assertDoubleIsInRange(x);
         this.x = x;
         assertClassInvariants();
     }
@@ -59,7 +57,7 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
      * methodtype set
      */
     public void setY(double y) {
-        assert isDoubleInRange(y):
+        assertDoubleIsInRange(y);
         this.y = y;
         assertClassInvariants();
     }
@@ -75,7 +73,7 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
      * methodtype set
      */
     public void setZ(double z) {
-        assert isDoubleInRange(z);
+        assertDoubleIsInRange(z);
         this.z = z;
         assertClassInvariants();
     }
