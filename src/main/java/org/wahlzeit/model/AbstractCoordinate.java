@@ -1,6 +1,11 @@
 package org.wahlzeit.model;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 public abstract class AbstractCoordinate implements Coordinate {
+
+    protected static ConcurrentHashMap<Integer, Coordinate> instances = new ConcurrentHashMap<>();
+
     @Override
     /**
      * @methodtype get
@@ -73,12 +78,45 @@ public abstract class AbstractCoordinate implements Coordinate {
     }
 
     /**
-     * @methodtype
+     * @methodtype assertion
      */
     protected void assertIsValidCoordinate(Coordinate c) {
         CartesianCoordinate cc = c.asCartesianCoordinate();
         assertDoubleIsInRange(cc.getX());
         assertDoubleIsInRange(cc.getY());
         assertDoubleIsInRange(cc.getZ());
+    }
+
+    @Override
+    /**
+     * @methodtype comparison
+     */
+    public int hashCode() {
+        int result;
+        long temp;
+        CartesianCoordinate cc = asCartesianCoordinate();
+        temp = Double.doubleToLongBits(cc.getX());
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(cc.getY());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(cc.getZ());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    /**
+     * @methodtype comparison
+     */
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CartesianCoordinate me = this.asCartesianCoordinate();
+        CartesianCoordinate that = (CartesianCoordinate) o;
+
+        if (Double.compare(me.getX(), that.getX()) != 0) return false;
+        if (Double.compare(me.getY(), that.getY()) != 0) return false;
+        return Double.compare(me.getZ(), that.getZ()) == 0;
     }
 }

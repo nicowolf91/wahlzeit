@@ -17,11 +17,11 @@ public class CoordinateTest {
 
     @Before
     public void setUp() {
-        cc = new CartesianCoordinate(1111., 2222., 3333.);
-        sc = new SphericCoordinate(45., 30., 6371.);
+        cc = CartesianCoordinate.getInstance(1111., 2222., 3333.);
+        sc = SphericCoordinate.getInstance(45., 30., 6371.);
 
-        cc2 = new CartesianCoordinate(0., 0., 0.);
-        sc2 = new SphericCoordinate(0., 0., 0.);
+        cc2 = CartesianCoordinate.getInstance(0., 0., 0.);
+        sc2 = SphericCoordinate.getInstance(0., 0., 0.);
     }
 
     @Test

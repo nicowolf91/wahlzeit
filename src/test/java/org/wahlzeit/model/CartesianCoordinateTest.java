@@ -16,10 +16,10 @@ public class CartesianCoordinateTest {
 
     @Before
     public void setUp() {
-        def = new CartesianCoordinate();
-        c1 = new CartesianCoordinate(5., 6., 7.);
-        c2 = new CartesianCoordinate(44., 13., 27.);
-        c3 = new CartesianCoordinate(11., 10., 12.);
+        def = CartesianCoordinate.getInstance(0., 0., 0.);
+        c1 = CartesianCoordinate.getInstance(5., 6., 7.);
+        c2 = CartesianCoordinate.getInstance(44., 13., 27.);
+        c3 = CartesianCoordinate.getInstance(11., 10., 12.);
     }
 
     @Test

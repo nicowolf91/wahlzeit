@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class CartesianCoordinate extends AbstractCoordinate implements Serializable {
 
-    private double x;
-    private double y;
-    private double z;
+    private final double x;
+    private final double y;
+    private final double z;
 
     /**
      * @methodtype constructor
      */
-    public CartesianCoordinate() {
+    private CartesianCoordinate() {
         this(0., 0., 0.);
         assertClassInvariants();
     }
@@ -19,7 +19,7 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
     /**
      * @methodtype constructor
      */
-    public CartesianCoordinate(double x, double y, double z) {
+    private CartesianCoordinate(double x, double y, double z) {
         assertDoubleIsInRange(x);
         assertDoubleIsInRange(y);
         assertDoubleIsInRange(z);
@@ -28,6 +28,22 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
         this.y = y;
         this.z = z;
         assertClassInvariants();
+    }
+
+    /**
+     * @methodtype factory method
+     */
+    public static CartesianCoordinate getInstance(final double x, final double y, final double z) {
+        CartesianCoordinate cc = new CartesianCoordinate(x, y, z);
+        int hash = cc.hashCode();
+        Coordinate c = instances.get(hash);
+
+        if(c == null) {
+            instances.put(hash, cc);
+            c = cc;
+        }
+
+        return (CartesianCoordinate) c;
     }
 
     /**
@@ -38,15 +54,6 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
     }
 
     /**
-     * methodtype set
-     */
-    public void setX(double x) {
-        assertDoubleIsInRange(x);
-        this.x = x;
-        assertClassInvariants();
-    }
-
-    /**
      * methodtype get
      */
     public double getY() {
@@ -54,28 +61,10 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
     }
 
     /**
-     * methodtype set
-     */
-    public void setY(double y) {
-        assertDoubleIsInRange(y);
-        this.y = y;
-        assertClassInvariants();
-    }
-
-    /**
      * methodtype get
      */
     public double getZ() {
         return z;
-    }
-
-    /**
-     * methodtype set
-     */
-    public void setZ(double z) {
-        assertDoubleIsInRange(z);
-        this.z = z;
-        assertClassInvariants();
     }
 
     @Override

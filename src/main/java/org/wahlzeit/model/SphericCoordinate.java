@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 public class SphericCoordinate extends AbstractCoordinate implements Serializable {
 
-    private double latitude;
-    private double longitude;
-    private double radius;
+    private final double latitude;
+    private final double longitude;
+    private final double radius;
 
     /**
      * @methodtype constructor
      */
-    public SphericCoordinate() {
-        this(0., 0., 0);
+    private SphericCoordinate() {
+        this(0., 0., 0.);
         assertClassInvariants();
     }
 
     /**
      * @methodtype constructor
      */
-    public SphericCoordinate(double lat, double lon, double radius) {
+    private SphericCoordinate(double lat, double lon, double radius) {
         assertDoubleIsInRange(lat);
         assertDoubleIsInRange(lon);
         assertDoubleIsInRange(radius);
@@ -33,20 +33,29 @@ public class SphericCoordinate extends AbstractCoordinate implements Serializabl
     }
 
     /**
+     * @methodtype factory method
+     */
+    public static SphericCoordinate getInstance(final double lat, final double lon, final double radius) {
+        SphericCoordinate sc = new SphericCoordinate(lat, lon, radius);
+        int hash = sc.hashCode();
+        Coordinate c = instances.get(hash);
+
+        if(c == null) {
+            instances.put(hash, sc);
+            c = sc;
+        }
+
+        return (SphericCoordinate) c;
+    }
+
+
+    /**
      * @methodtype get
      */
     public double getLatitude() {
         return latitude;
     }
 
-    /**
-     * @methodtype set
-     */
-    public void setLatitude(double lat) {
-        assertDoubleIsInRange(lat);
-        this.latitude = lat;
-        assertClassInvariants();
-    }
 
     /**
      * @methodtype get
@@ -56,29 +65,10 @@ public class SphericCoordinate extends AbstractCoordinate implements Serializabl
     }
 
     /**
-     * @methodtype set
-     */
-    public void setLongitude(double lon) {
-        assertDoubleIsInRange(lon);
-        this.longitude = lon;
-        assertClassInvariants();
-    }
-
-    /**
      * @methodtype get
      */
     public double getRadius() {
         return radius;
-    }
-
-    /**
-     * @methodtype set
-     */
-    public void setRadius(double radius) {
-        assertDoubleIsInRange(radius);
-        assertIsValidRadius(radius);
-        this.radius = radius;
-        assertClassInvariants();
     }
 
     @Override
@@ -86,7 +76,7 @@ public class SphericCoordinate extends AbstractCoordinate implements Serializabl
      * @mathodtype conversion
      */
     public CartesianCoordinate asCartesianCoordinate() {
-        CartesianCoordinate result = new CartesianCoordinate(getCartesianX(), getCartesianY(), getCartesianZ());
+        CartesianCoordinate result = CartesianCoordinate.getInstance(getCartesianX(), getCartesianY(), getCartesianZ());
 
         assert this.isEqual(result);
         assertClassInvariants();
@@ -126,7 +116,6 @@ public class SphericCoordinate extends AbstractCoordinate implements Serializabl
      * @methodtype assertion
      */
     protected void assertClassInvariants() {
-        super.assertClassInvariants();
         assertDoubleIsInRange(latitude);
         assertDoubleIsInRange(longitude);
         assertDoubleIsInRange(radius);

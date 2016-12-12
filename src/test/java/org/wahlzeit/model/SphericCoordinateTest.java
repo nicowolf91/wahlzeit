@@ -16,10 +16,10 @@ public class SphericCoordinateTest {
 
     @Before
     public void setUp() {
-        def = new SphericCoordinate();
-        c1 = new SphericCoordinate(60.0, 30.0, 6371.);
-        c2 = new SphericCoordinate(90.0, 90.0, 6371.);
-        c3 = new SphericCoordinate(-50.0, 70.0, 6371.);
+        def = SphericCoordinate.getInstance(0., 0., 0.);
+        c1 = SphericCoordinate.getInstance(60.0, 30.0, 6371.);
+        c2 = SphericCoordinate.getInstance(90.0, 90.0, 6371.);
+        c3 = SphericCoordinate.getInstance(-50.0, 70.0, 6371.);
     }
 
     @Test
