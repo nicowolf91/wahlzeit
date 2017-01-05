@@ -2,6 +2,10 @@ package org.wahlzeit.model;
 
 import java.io.Serializable;
 
+@PatternInstance(
+        patternName = "Template",
+        participants = {"ConcreteClass"}
+)
 public class CartesianCoordinate extends AbstractCoordinate implements Serializable {
 
     private final double x;
@@ -73,5 +77,12 @@ public class CartesianCoordinate extends AbstractCoordinate implements Serializa
      */
     public CartesianCoordinate asCartesianCoordinate() {
         return this;
+    }
+
+    @Override
+    /**
+     * @methodtype assertion
+     */
+    void assertSubclassInvariants() {
     }
 }

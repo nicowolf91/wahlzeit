@@ -2,6 +2,10 @@ package org.wahlzeit.model;
 
 import java.io.Serializable;
 
+@PatternInstance(
+        patternName = "Template",
+        participants = {"ConcreteClass"}
+)
 public class SphericCoordinate extends AbstractCoordinate implements Serializable {
 
     private final double latitude;
@@ -115,7 +119,8 @@ public class SphericCoordinate extends AbstractCoordinate implements Serializabl
     /**
      * @methodtype assertion
      */
-    protected void assertClassInvariants() {
+    @Override
+    protected void assertSubclassInvariants() {
         assertDoubleIsInRange(latitude);
         assertDoubleIsInRange(longitude);
         assertDoubleIsInRange(radius);

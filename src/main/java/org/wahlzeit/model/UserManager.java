@@ -33,7 +33,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-
+@PatternInstance(
+		patternName = "Singleton",
+		participants = {"Singleton"}
+)
 /**
  * The UserManager provides access to and manages Users (including Moderators and Administrators).
  */

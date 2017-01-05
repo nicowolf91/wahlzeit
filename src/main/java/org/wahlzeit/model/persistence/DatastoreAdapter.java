@@ -26,6 +26,7 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Work;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import org.wahlzeit.model.PatternInstance;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.services.OfyService;
 
@@ -34,6 +35,10 @@ import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.util.logging.Logger;
 
+@PatternInstance(
+		patternName = "Adapter",
+		participants = {"Adaptor"}
+)
 /**
  * Adapter for the Google Datastore. Use default constructor to create an instance.
  * 
@@ -109,6 +114,10 @@ public class DatastoreAdapter extends ImageStorage {
 		return result;
 	}
 
+	@PatternInstance(
+			patternName = "Adapter",
+			participants = {"Adaptee"}
+	)
 	/**
 	 * Wrapper class to store {@link Image}s in the Google Datastore with Objectify.
 	 * 

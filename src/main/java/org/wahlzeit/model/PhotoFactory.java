@@ -24,6 +24,10 @@ import org.wahlzeit.services.LogBuilder;
 
 import java.util.logging.Logger;
 
+@PatternInstance(
+		patternName = "Abstract Factory",
+		participants = {"Concrete Factory"}
+)
 /**
  * An Abstract Factory for creating photos and related objects.
  */

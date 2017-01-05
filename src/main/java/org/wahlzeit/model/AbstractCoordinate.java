@@ -2,6 +2,10 @@ package org.wahlzeit.model;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+@PatternInstance(
+        patternName = "Template",
+        participants = {"AbstractClass"}
+)
 public abstract class AbstractCoordinate implements Coordinate {
 
     protected static ConcurrentHashMap<Integer, Coordinate> instances = new ConcurrentHashMap<>();
@@ -75,7 +79,13 @@ public abstract class AbstractCoordinate implements Coordinate {
      */
     protected void assertClassInvariants() {
         assertIsValidCoordinate(this);
+        assertSubclassInvariants();
     }
+
+    /**
+     * @methodtype assertion
+     */
+    abstract void assertSubclassInvariants();
 
     /**
      * @methodtype assertion

@@ -20,10 +20,15 @@
 
 package org.wahlzeit.services.mailing;
 
+import org.wahlzeit.model.PatternInstance;
 import org.wahlzeit.services.EmailAddress;
 
 import javax.mail.Message;
 
+@PatternInstance(
+		patternName = "Null Object",
+		participants = {"Null Object"}
+)
 /**
  * Abstract superclass for non-trivial EmailServer implementations.
  */
