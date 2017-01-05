@@ -3,8 +3,8 @@ package org.wahlzeit.model;
 import java.util.concurrent.ConcurrentHashMap;
 
 @PatternInstance(
-        patternName = "Template",
-        participants = {"AbstractClass"}
+        patternName = "Template Method",
+        participants = {"Abstract Class"}
 )
 public abstract class AbstractCoordinate implements Coordinate {
 

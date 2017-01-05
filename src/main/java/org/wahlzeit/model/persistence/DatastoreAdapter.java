@@ -114,10 +114,6 @@ public class DatastoreAdapter extends ImageStorage {
 		return result;
 	}
 
-	@PatternInstance(
-			patternName = "Adapter",
-			participants = {"Adaptee"}
-	)
 	/**
 	 * Wrapper class to store {@link Image}s in the Google Datastore with Objectify.
 	 * 

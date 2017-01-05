@@ -3,8 +3,8 @@ package org.wahlzeit.model;
 import java.io.Serializable;
 
 @PatternInstance(
-        patternName = "Template",
-        participants = {"ConcreteClass"}
+        patternName = "Template Method",
+        participants = {"Concrete Class"}
 )
 public class SphericCoordinate extends AbstractCoordinate implements Serializable {
 
