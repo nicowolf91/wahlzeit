@@ -40,8 +40,8 @@ public class DrinksPhotoFactory extends PhotoFactory {
     /**
      * @methodtype factory
      */
-    public DrinksPhoto createPhoto(PhotoId id, double alcoholConcentration, DrinkType drinkType) {
-        return new DrinksPhoto(id, alcoholConcentration, drinkType);
+    public DrinksPhoto createPhoto(PhotoId id, Drink drink) {
+        return new DrinksPhoto(id, drink);
     }
 
     /**
