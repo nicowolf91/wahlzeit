@@ -49,7 +49,7 @@ public abstract class ObjectManager {
 		assertIsNonNullArgument(id, "id");
 
 		log.config(LogBuilder.createSystemMessage().
-				addMessage("Load Name " + type.toString() + " with ID " + id + " from datastore.").toString());
+				addMessage("Load Type " + type.toString() + " with ID " + id + " from datastore.").toString());
 		return OfyService.ofy().load().type(type).id(id).now();
 	}
 
@@ -70,7 +70,7 @@ public abstract class ObjectManager {
 		assertIsNonNullArgument(id, "id");
 
 		log.config(LogBuilder.createSystemMessage().
-				addMessage("Load Name " + type.toString() + " with ID " + id + " from datastore.").toString());
+				addMessage("Load Type " + type.toString() + " with ID " + id + " from datastore.").toString());
 		return OfyService.ofy().load().type(type).id(id).now();
 	}
 
@@ -84,7 +84,7 @@ public abstract class ObjectManager {
 		assertIsNonNullArgument(value, "value");
 
 		log.config(LogBuilder.createSystemMessage().
-				addMessage("Load Name " + type.toString() + " with parameter " +
+				addMessage("Load Type " + type.toString() + " with parameter " +
 						parameterName + " == " + value + " from datastore.").toString());
 
 		return OfyService.ofy().load().type(type).ancestor(applicationRootKey).filter(parameterName, value).first()
